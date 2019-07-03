@@ -4,9 +4,9 @@ services:
     build:
       context: ./
     container_name: ubuntu
+    hostname: ubuntu
     tty: true
     volumes:
       #mkdir -p ./ubuntu && chmod -R 775 ./ubuntu && umask 0002
-      - ./ubuntu/ansible:/etc/ansible
+      - ./data:/data
       - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
