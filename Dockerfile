@@ -34,7 +34,7 @@ RUN set -eux \
   && chmod a+x /usr/local/bin/docker \
   && rm -rf docker && rm -f docker.tgz \  
   && echo "######### clear apt cache #########" \ 
-  && rm -rf /var/lib/apt/lists/* && apt-get clean    
+  && rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove  
     
     
 ###########################################################################
