@@ -2,7 +2,7 @@ From ubuntu:18.04
 ###########################################################################
 # ARG app Version
 ###########################################################################
-
+ARG DOCKER_VERSION=18.09.0
 ###########################################################################
 # ENV
 ###########################################################################
@@ -26,7 +26,13 @@ RUN set -eux \
   && echo "######### ssh_config ##########" \
   && echo "Host *" >> /etc/ssh/ssh_config \
   && echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
-  && echo "    UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config \    
+  && echo "    UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config \
+  && echo "######### docker client #########"         \          
+  && curl -L -o docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
+  && tar xf docker.tgz  \
+  && mv docker/docker /usr/local/bin/docker \
+  && chmod a+x /usr/local/bin/docker \
+  && rm -rf docker \  
   && echo "######### clear apt cache #########" \ 
   && rm -rf /var/lib/apt/lists/* && apt-get clean    
     
