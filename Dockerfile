@@ -18,7 +18,7 @@ RUN set -eux \
   echo "\n################## dash > bash ###################" \
   && mv /bin/sh /bin/sh.old && ln -s bash /bin/sh \
   && echo "\n################## apt update ###################" \
-  && apt-get update  && apt-get install -y sudo vim wget netcat git curl unzip locales unzip rsync python python-pip netcat git cron \
+  && apt-get update  && apt-get install -y sudo vim wget netcat dnsutils git curl unzip locales unzip rsync python python-pip netcat git cron \
   && echo "\n################## add root bashrc ###################" \
   && locale-gen zh_TW.UTF-8 && echo 'export LANGUAGE="zh_TW.UTF-8"' >> /root/.bashrc \
   && echo 'export LANG="zh_TW.UTF-8"' >> /root/.bashrc \
