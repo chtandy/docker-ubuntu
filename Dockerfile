@@ -8,7 +8,7 @@ ARG DOCKER_VERSION=18.09.0
 # ENV
 ###########################################################################
 # COPY
-#COPY ubuntu/conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ubuntu/conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ###########################################################################
 # RUN
 RUN set -eux \
@@ -39,4 +39,6 @@ RUN set -eux \
 # VOLUME
 ###########################################################################
 # ENTRYPOINT
-
+###########################################################################
+# CMD
+CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
