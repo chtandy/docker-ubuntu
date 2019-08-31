@@ -7,7 +7,8 @@ ARG DOCKER_VERSION=18.09.0
 ###########################################################################
 # ENV
 ###########################################################################
-# COPY
+# ADD
+ADD ubuntu/conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ###########################################################################
 # RUN
 RUN set -eux \
@@ -33,7 +34,6 @@ RUN set -eux \
   && echo "\n################## clear apt cache ##################" \ 
   && rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove  
     
-ADD ubuntu/conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf    
 ###########################################################################
 # VOLUME
 ###########################################################################
