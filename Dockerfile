@@ -8,6 +8,7 @@ ARG DOCKER_VERSION=18.09.0
 # ENV
 ###########################################################################
 # COPY
+#COPY ubuntu/conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ###########################################################################
 # RUN
 RUN set -eux \
