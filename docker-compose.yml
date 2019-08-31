@@ -7,6 +7,6 @@ services:
     hostname: ubuntu
     tty: true
     volumes:
-      #mkdir -p ./ubuntu && chmod -R 775 ./ubuntu && umask 0002
+      #mkdir -p ./data && chmod -R 775 ./data && umask 0002
       - ./data:/data
       - /var/run/docker.sock:/var/run/docker.sock
