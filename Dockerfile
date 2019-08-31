@@ -15,7 +15,7 @@ RUN set -eux \
   && mv /bin/sh /bin/sh.old && ln -s bash /bin/sh \
   && echo "\n################## apt update ###################" \
   && apt-get update  && apt-get install -y sudo vim wget netcat dnsutils git curl unzip locales unzip rsync python \
-     python-pip netcat git supervisor \
+     python-pip netcat git cron supervisor \
   && echo "\n################## add root bashrc ###################" \
   && locale-gen zh_TW.UTF-8 && echo 'export LANGUAGE="zh_TW.UTF-8"' >> /root/.bashrc \
   && echo 'export LANG="zh_TW.UTF-8"' >> /root/.bashrc \
@@ -33,7 +33,7 @@ RUN set -eux \
   && echo "\n################## clear apt cache ##################" \ 
   && rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove  
     
-    
+ADD ubuntu/conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf    
 ###########################################################################
 # VOLUME
 ###########################################################################
