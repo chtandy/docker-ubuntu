@@ -7,6 +7,5 @@ services:
     hostname: ubuntu
     tty: true
     volumes:
-      #mkdir -p ./data && chmod -R 775 ./data && umask 0002
-      - ./data:/data
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./ubuntu/conf/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
