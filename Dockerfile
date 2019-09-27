@@ -2,8 +2,9 @@
 # From
 From ubuntu:16.04
 ###########################################################################
+## 使用docker-compose build --build-arg DockerID=$(cat /etc/group|grep docker|cut -d':' -f3)
 # ARG app Version
-
+ARG DOCKER_VERSION=18.09.0
 ###########################################################################
 # ENV
 ###########################################################################
@@ -16,7 +17,7 @@ RUN set -eux \
   && mv /bin/sh /bin/sh.old && ln -s bash /bin/sh \
   && echo "\n################## apt update ###################" \
   && apt-get update  && apt-get install -y sudo vim wget netcat dnsutils git curl unzip locales unzip rsync python \
-     python-pip netcat git \
+     python-pip netcat git jg \
   && echo "\n################## add root bashrc ###################" \
   && locale-gen zh_TW.UTF-8 && echo 'export LANGUAGE="zh_TW.UTF-8"' >> /root/.bashrc \
   && echo 'export LANG="zh_TW.UTF-8"' >> /root/.bashrc \
@@ -25,6 +26,16 @@ RUN set -eux \
   && echo "Host *" >> /etc/ssh/ssh_config \
   && echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
   && echo "    UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config \
+  && echo "\n################## docker client ##################"         \          
+  && curl -L -o docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
+  && tar xf docker.tgz  \
+  && mv docker/docker /usr/local/bin/docker \
+  && chmod a+x /usr/local/bin/docker \
+  && rm -rf docker && rm -f docker.tgz \
+  && groupadd docker -g ${DockerID} \
+  && touch /var/run/docker.sock \
+  && chown root:${DockerID} /var/run/docker.sock \
+  && usermod -aG docker root \
   && echo "\n################## clear apt cache ##################" \ 
   && rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove  
     
