@@ -1,8 +1,8 @@
+## 使用docker-compose build --build-arg DockerID=$(cat /etc/group|grep docker|cut -d':' -f3)
 ###########################################################################
 # From
 From ubuntu:16.04
 ###########################################################################
-## 使用docker-compose build --build-arg DockerID=$(cat /etc/group|grep docker|cut -d':' -f3)
 # ARG app Version
 ARG DOCKER_VERSION=18.09.0
 ###########################################################################
