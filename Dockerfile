@@ -5,6 +5,7 @@ From ubuntu:16.04
 ###########################################################################
 # ARG app Version
 ARG DOCKER_VERSION=18.09.0
+ARG DockerID
 ###########################################################################
 # ENV
 ###########################################################################
@@ -34,8 +35,7 @@ RUN set -eux \
   && rm -rf docker && rm -f docker.tgz \
   && groupadd docker -g ${DockerID} \
   && touch /var/run/docker.sock \
-  && chown root:${DockerID} /var/run/docker.sock \
-  && usermod -aG docker root \
+  && chown root:docker /var/run/docker.sock \
   && echo "\n################## clear apt cache ##################" \ 
   && rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove  
     
