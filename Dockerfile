@@ -9,6 +9,7 @@ ARG DockerID
 ###########################################################################
 # ENV
 ENV DOCKER_VERSION=18.09.0
+ENV KUBECTL=v1.15.3
 ###########################################################################
 # ADD
 
@@ -37,6 +38,22 @@ RUN set -eux \
   && groupadd docker -g ${DockerID} \
   && touch /var/run/docker.sock \
   && chown root:docker /var/run/docker.sock \
+  && echo "\n################## kubernete clinet ##################" \
+  && wget https://dl.k8s.io/${KUBECTL}/kubernetes-client-linux-amd64.tar.gz \
+  && tar -xzvf kubernetes-client-linux-amd64.tar.gz \
+  && mv kubernetes/client/bin/kubectl  /usr/bin/ \
+  && rm -f kubernetes-client-linux-amd64.tar.gz \
+  && rm -rf kubernetes \
+  && echo "\n################## install aws cli ##################" \
+  && curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip \
+  && unzip awscli-bundle.zip \
+  && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws \
+  && rm -f awscli-bundle.zip \
+  && rm -rf awscli-bundle \
+  && echo "\n################## install ansible ##################" \
+  && apt-get update && apt-get install software-properties-common -y \
+  && apt-add-repository ppa:ansible/ansible \
+  && apt-get install ansible -y \
   && echo "\n################## clear apt cache ##################" \ 
   && rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove  
     
