@@ -26,7 +26,7 @@ RUN set -eux \
   && echo "Host *" >> /etc/ssh/ssh_config \
   && echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
   && echo "    UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config \
-  && echo "\n################## docker client ##################"         \          
+  && echo "\n################## docker client ##################" \          
   && curl -L -o docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
   && tar xf docker.tgz  \
   && mv docker/docker /usr/local/bin/docker \
