@@ -13,6 +13,7 @@
 - kubectl client
 - aws cli
 - eksctl
+- aws-iam-authenticator
 
 
 ### 使用方式
