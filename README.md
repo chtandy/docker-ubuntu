@@ -20,3 +20,6 @@
 ```
 docker-compose build --build-arg DockerID=$(cat /etc/group|grep docker|cut -d':' -f3)
 ```
+- mac
+  - 刪除Dockerfile 中的`&& groupadd docker -g ${DockerID} \`
+  - 執行`docker-compose up -d --build`即可
